@@ -15,7 +15,7 @@ For a more powerful scraper, try [Instamancer](https://github.com/scriptsmith/in
 ### From this repository
 
 ```
-git clone https://github.com/scriptsmith/instaphyte.git
+git clone https://github.com/mgjoo/instaphyte.git
 cd instaphyte
 pip3 install -e .
 ```
