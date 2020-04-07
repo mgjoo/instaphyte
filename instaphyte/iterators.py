@@ -36,6 +36,9 @@ class Instagram(Source):
                     raise StopIteration
 
                 if self.edge_key == "related_tags":
+                    count = dict()
+                    count['count'] = self.response['graphql']['hashtag']['edge_hashtag_to_media']['count']
+                    self.data.append(count)
                     self.max = len(self.data) 
                 
             except ApiError as e:
