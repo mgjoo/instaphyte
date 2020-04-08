@@ -1,14 +1,16 @@
 from instaphyte import Instagram
 import json
 import datetime
+import time
 
 api = Instagram()
 
 save_dir = './outputs/'
-hashtag = "apple"
-num_posts = 10
-num_posts_in_batch = 5
+hashtag = "맛집"
+num_posts = 10000
+num_posts_in_batch = 100
 
+start = time.time()
 posts_list = []
 for i, post in enumerate(api.hashtag(hashtag, num_posts)): 
     posts_list.append(post)
@@ -23,6 +25,8 @@ for i, post in enumerate(api.hashtag(hashtag, num_posts)):
         print('{}/{}, {}'.format(i + 1, num_posts, out_path))
 
         posts_list.clear()
+end = time.time()
+print("elapsed time (s): ", end - start)
 
 related_tags_list = []
 for related_tag in api.hashtag_related_tags(hashtag): 
