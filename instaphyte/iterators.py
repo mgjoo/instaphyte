@@ -49,3 +49,6 @@ class Instagram(Source):
 
     def hashtag_related_tags(self, tag, count=0):
         return self.InstagramIter(tag, self.api.hashtag_related_tags, count, "hashtag", "related_tags")
+
+    def hashtag_top_posts(self, tag, count=9):
+        return self.InstagramIter(tag, self.api.hashtag_top_posts, count, "hashtag", "top_posts")

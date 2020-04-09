@@ -47,3 +47,12 @@ class InstagramAPI(API):
         parameters = self.merge_params(parameters, params)
 
         return self.api_call("tags/" + tag, parameters)
+
+    def hashtag_top_posts(self, tag, max_id=None, params=None):
+        parameters = {
+            "__a": 1,
+            "max_id": max_id
+        }
+        parameters = self.merge_params(parameters, params)
+
+        return self.api_call("tags/" + tag, parameters)
