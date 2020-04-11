@@ -33,9 +33,15 @@ for i, hashtag in enumerate(hashtags, 1):
     for i, post in enumerate(api.hashtag_top_posts(hashtag, num_top_posts)): 
         posts_list.append(post)
 
+        
+
         if (i > 0 and (i + 1) % num_top_posts_in_batch == 0) or i == (num_top_posts - 1):
             dt = datetime.datetime.now()
             out_path = save_dir + hashtag + '_top_posts_' + dt.strftime("%Y%m%d_%H%M%S_%f") + '.json'
+
+            origin = dict()
+            origin['origin_hashtag'] = hashtag
+            posts_list.append(origin)
 
             with open(out_path, 'w') as f:
                 f.write(json.dumps(posts_list, indent=4))
