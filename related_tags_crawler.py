@@ -4,18 +4,17 @@ import datetime
 import time
 import os
 
-depth = 3
+depth = 2
 
 hashtags = [
-    "교대역맛집", 
-    "서초역맛집", 
-    "샤로수길맛집", 
-    "낙성대역맛집", 
+    "맛집", 
 ]
 
-save_dir = './outputs/related_hashtags/'
+save_dir = './outputs/related_hashtags/맛집/'
 if not os.path.exists(save_dir):
     os.makedirs(save_dir)
+
+_dict = dict()
 
 api = Instagram()
 for d in range(0, depth):
@@ -41,7 +40,20 @@ for d in range(0, depth):
         print("elapsed time (s): ", end - start)
 
         for related_tag in related_tags_list:
-            #print(related_tag)
             if 'node' in related_tag:
-                new_hashtags.append(related_tag['node']['name'])
+                tag = related_tag['node']['name']
+                new_hashtags.append(tag)
+                
+                if tag not in _dict:
+                    _dict[tag] = 1
+                else:
+                    _dict[tag] = _dict[tag] + 1
+
     hashtags = new_hashtags
+
+print(_dict)
+
+res = sorted(_dict.items(), key=(lambda x: x[1]), reverse = True)
+
+with open('./outputs/result.json', 'w', encoding='utf-8') as make_file:
+    json.dump(res, make_file, indent="\t", ensure_ascii=False)
